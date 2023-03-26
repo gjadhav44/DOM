@@ -20,3 +20,7 @@ var li2 = document.querySelector(".list-group-item:nth-child(2)");
 li2.style.backgroundColor = "yellow";
 var li3 = document.querySelector(".list-group-item:nth-child(3)");
 li3.style.display = "none";
+var parentC = document.querySelector("#header-title");
+parentC.parentElement.textContent = "HEllo";
+var parentb = document.querySelector(".items");
+parentb.childElement.textContent = "HEllo";
