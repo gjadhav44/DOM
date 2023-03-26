@@ -1,26 +1,67 @@
-import "./styles.css";
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-import "./styles.css";
-var header_title = document.getElementById("header-title");
-var header = document.getElementById("main-header");
-console.log(header_title);
-header_title.textContent = "Helow";
-header.style.borderBottom = "solid 3px #000";
-var nodes = document.getElementsByClassName("title");
-nodes[0].style.color = "green";
-nodes[0].style.fontWeight = "bold";
-var list = document.getElementsByClassName("list-group-item");
-list[2].style.backgroundColor = "Yellow";
-for (var i = 0; i < 4; i++) {
-  list[i].style.color = "blue";
-  list[i].style.fontWeight = "bold";
-  list[i].style.backgroundColor = "#ccc";
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+filter.addEventListener('keyup', filterItems);
+
+// Add item
+function addItem(e){
+  e.preventDefault();
+
+  // Get input value
+  var newItem = document.getElementById('item').value;
+
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
+
+  // Create del button element
+  var deleteBtn = document.createElement('button');
+
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
+
+  // Append button to li
+  li.appendChild(deleteBtn);
+
+  // Append li to list
+  itemList.appendChild(li);
 }
-var li2 = document.querySelector(".list-group-item:nth-child(2)");
-li2.style.backgroundColor = "yellow";
-var li3 = document.querySelector(".list-group-item:nth-child(3)");
-li3.style.display = "none";
-var parentC = document.querySelector("#header-title");
-parentC.parentElement.textContent = "HEllo";
-var parentb = document.querySelector(".items");
-parentb.childElement.textContent = "HEllo";
+
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
+
+// Filter Items
+function filterItems(e){
+  // convert text to lowercase
+  var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
