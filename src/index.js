@@ -16,9 +16,7 @@ for (var i = 0; i < 4; i++) {
   list[i].style.fontWeight = "bold";
   list[i].style.backgroundColor = "#ccc";
 }
-var li5 = document.getElementsByTagName("li");
-for (var i = 0; i < 4; i++) {
-  li5[4].style.color = "blue";
-  li5[4].style.fontWeight = "bold";
-  li5[4].style.backgroundColor = "#ccc";
-}
+var li2 = document.querySelector(".list-group-item:nth-child(2)");
+li2.style.backgroundColor = "yellow";
+var li3 = document.querySelector(".list-group-item:nth-child(3)");
+li3.style.display = "none";
